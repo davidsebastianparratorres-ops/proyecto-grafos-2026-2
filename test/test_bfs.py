@@ -29,7 +29,7 @@ def ejecutar_prueba():
     
     # 3. Ejecutar el BFS desde el nodo "A"
     print("Ejecutando BFS desde el vértice 'A'...")
-    resultado = g.bfs("A")
+    resultado = g.dfs("A")
     
     # 4. Verificar resultados
     print(f"Resultado del recorrido: {resultado}")

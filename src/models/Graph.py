@@ -20,26 +20,62 @@ class Graph:
             print("el vertice no se encuentra en el grafo")
             return
         
-        cola=deque()
+        dequeR=deque()
         recorrido=[]
-        initial_nodo=self.vertex[tag]
-        cola.append(initial_nodo)
-        initial_nodo.mark_as_visited()
+        initial_node=self.vertex[tag]
+        dequeR.append(initial_node)
+        initial_node.mark_as_visited()
                 
-        while len(cola)>0:
+        while len(dequeR)>0:
             
-            currenly_node:Vertex=cola.popleft()
+            currenly_node:Vertex=dequeR.popleft()
             recorrido.append(currenly_node.tag)  
             
             
             for value in currenly_node.links:
                 if not currenly_node.links[value].visited:
-                    cola.append(currenly_node.links[value])
+                    dequeR.append(currenly_node.links[value])
                     currenly_node.links[value].mark_as_visited()
                     
     
         return recorrido
-                    
+    
+    def dfs(self, tag: str):
+        
+        if tag not in self.vertex:
+            print("el vertice no se encuentra en el grafo")
+            return
+        
+        stack=deque()
+        recorrido=[]
+        initial_node=self.vertex[tag]   
+        stack.append(initial_node)
+        initial_node.mark_as_visited()
+        currenly_node=initial_node
+        recorrido.append(initial_node.tag)
+        
+        
+        
+        while len(stack)>0:
+            
+            next_node=next((currenly_node.links[tag] for tag in currenly_node.links if not currenly_node.links[tag].visited),None)
+            
+            if next_node is not None:
+                stack.append(next_node)
+                next_node.mark_as_visited()
+                currenly_node=next_node
+                recorrido.append(currenly_node.tag)
+                
+            else:
+                stack.pop()
+                if len(stack) > 0:
+                    currenly_node=stack[-1]
+    
+        return recorrido
+            
+            
+            
+                            
             
         
         
