@@ -46,6 +46,30 @@ class Graph:
             print("el vertice no se encuentra en el grafo")
             return
         
+        recorrido=[]
+        initial_node=self.vertex[tag] 
+        
+        self._dfs(initial_node, recorrido)
+        return recorrido
+    
+    def _dfs(self, currenly_node, recorrido):
+        
+        currenly_node.mark_as_visited()
+        recorrido.append(currenly_node.tag)
+        
+        for neighbor_tag in currenly_node.links:
+            
+            neighbor_node =self.vertex[neighbor_tag]
+                            
+            if not neighbor_node.visited:
+                self._dfs(neighbor_node, recorrido)
+        
+        
+                
+                
+          
+        
+        """ 
         stack=deque()
         recorrido=[]
         initial_node=self.vertex[tag]   
@@ -71,7 +95,8 @@ class Graph:
                 if len(stack) > 0:
                     currenly_node=stack[-1]
     
-        return recorrido
+        return recorrido 
+        """
             
             
             
