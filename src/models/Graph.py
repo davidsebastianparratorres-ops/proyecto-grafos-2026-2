@@ -12,8 +12,21 @@ class Graph:
     
     def add_Vertex(self,tag):
         v=Vertex(tag)
-        self.vertex[tag]=v
+        self.vertex[tag]=v  
         
+    def del_Vertex(self,tag):
+        
+        if tag not in self.vertex:
+            print("No existe ese vertice en el grafo")
+            return
+        
+        for v_tag, vertex_obj in self.vertex.items(): #se recorre cada vertice
+            if tag in vertex_obj.get_links(): #si en sus enlaces esta el tag se elimina de los enlaces
+                del vertex_obj.get_links()[tag]
+                
+        del self.vertex[tag] #se elimina el vertice del grafo
+            
+            
     def bfs(self, tag: str):
         
         if tag not in self.vertex:
@@ -97,6 +110,16 @@ class Graph:
     
         return recorrido 
         """
+    
+    def least_expensive_link(self):
+        
+        for tag, value in self.vertex.items():
+            for cost in value.links:
+                return    
+                
+                
+
+    
             
             
             
