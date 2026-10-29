@@ -112,10 +112,23 @@ class Graph:
         """
     
     def least_expensive_link(self):
+        lower=None
+        for value in self.vertex.values():
+            if value.lower_cost_link()[2] is not None:  
+                if lower is None or value.lower_cost_link()[2]<lower[2] :
+                    lower=value.lower_cost_link()
         
-        for tag, value in self.vertex.items():
-            for cost in value.links:
-                return    
+        return lower
+    
+    #esta en proceso
+    def mst_prim(self):
+        start=self.least_expensive_link
+        visited=[]
+        visited.append(start[1])
+        visited.append(start[2])
+        
+        return       
+            
                 
                 
 
