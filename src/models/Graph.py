@@ -5,7 +5,7 @@ from collections import deque
 @dataclass
 
 class Graph:
-    vertex:dict[str,Vertex] = field(default_factory=dict)
+    vertex:dict = field(default_factory=dict)
 
     def get_Vertex(self):
         return self.vertex

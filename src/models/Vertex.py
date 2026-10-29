@@ -25,6 +25,21 @@ class Vertex:
     def get_links(self):
         return self.links
     
+    def lower_cost_link(self):
+        
+        lower=None
+        lower_destiny=None
+        for destiny,cost in self.links.items():
+            for c in cost:
+                if lower is None or c<lower:
+                    lower=c
+                    lower_destiny= destiny
+                    
+        lower_link=(self.tag,lower_destiny,lower) 
+            
+        return lower_link
+    
+    
     
     
         

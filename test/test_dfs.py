@@ -31,6 +31,8 @@ def probar_dfs_profundo():
     # C se conecta a D (el final del camino largo)
     vertices["C"].links["D"] = vertices["D"]
     
+    
+    
     # 3. Ejecutar el DFS desde el nodo inicial "A"
     print("Ejecutando DFS desde el vértice 'A'...")
     resultado = g.dfs("A")  # (Usa el nombre exacto de tu método, si le cambiaste a 'dfs' cámbialo aquí)

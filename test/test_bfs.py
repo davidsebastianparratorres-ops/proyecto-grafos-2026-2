@@ -27,9 +27,13 @@ def ejecutar_prueba():
     vertices["B"].links["D"] = vertices["D"]
     vertices["C"].links["D"] = vertices["D"]
     
+    g.del_Vertex("D")
+    
+    
+    
     # 3. Ejecutar el BFS desde el nodo "A"
     print("Ejecutando BFS desde el vértice 'A'...")
-    resultado = g.dfs("A")
+    resultado = g.bfs("A")
     
     # 4. Verificar resultados
     print(f"Resultado del recorrido: {resultado}")
