@@ -77,57 +77,44 @@ class Graph:
             if not neighbor_node.visited:
                 self._dfs(neighbor_node, recorrido)
         
-        
-                
-                
-          
-        
-        """ 
-        stack=deque()
-        recorrido=[]
-        initial_node=self.vertex[tag]   
-        stack.append(initial_node)
-        initial_node.mark_as_visited()
-        currenly_node=initial_node
-        recorrido.append(initial_node.tag)
-        
-        
-        
-        while len(stack)>0:
-            
-            next_node=next((currenly_node.links[tag] for tag in currenly_node.links if not currenly_node.links[tag].visited),None)
-            
-            if next_node is not None:
-                stack.append(next_node)
-                next_node.mark_as_visited()
-                currenly_node=next_node
-                recorrido.append(currenly_node.tag)
-                
-            else:
-                stack.pop()
-                if len(stack) > 0:
-                    currenly_node=stack[-1]
-    
-        return recorrido 
-        """
     
     def least_expensive_link(self):
         lower=None
         for value in self.vertex.values():
-            if value.lower_cost_link()[2] is not None:  
+            if value.lower_cost_link()[2] is not None: #si el costo de la menor arista no es None  
                 if lower is None or value.lower_cost_link()[2]<lower[2] :
                     lower=value.lower_cost_link()
         
         return lower
     
-    #esta en proceso
     def mst_prim(self):
-        start=self.least_expensive_link
-        visited=[]
-        visited.append(start[1])
-        visited.append(start[2])
         
-        return       
+        if not self.vertex:return None
+        
+        start=self.least_expensive_link() #(tag_origen, tag_destino, costo), empieza por el menor enlace global
+        if start is None: return None
+        visited=[]#lista de strings(etiquetas)
+        visited.append(start[0])
+        visited.append(start[1])
+        mst=[]#lista de aristas(tuplas)
+        mst.append(start)
+        
+        while(len(visited)<len(self.vertex)):#acaba cuando se visitaron todos los vertices
+            
+            lower=None
+            
+            for tag in visited:
+                candidate=self.vertex[tag].lower_cost_link(visited)
+                
+                if candidate[2] is not None:
+                    if lower is None or candidate[2]<lower[2]:
+                        lower=candidate
+            
+            if lower is None: return None
+            visited.append(lower[1])
+            mst.append(lower)
+        
+        return mst    
             
                 
                 
