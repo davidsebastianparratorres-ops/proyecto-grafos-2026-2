@@ -123,28 +123,25 @@ class Graph:
         if origin not in self.get_Vertex() or target not in self.get_Vertex():
             return None
         distance={}# {vertice:(costo, origen)<-tupla}
-        not_visited=[]  
+        visited=[]  
         
         for tag in self.get_Vertex():
             distance[tag]= (float('inf'),None)#se etiquetan todas las distancias como infinito
-            not_visited.append(tag)
-        
-        
-            
+          
         distance[origin]=(0,None)
         
-        while(len(not_visited)>0):#mientras queden vertices por visitar
+        while(len(visited)<len(self.vertex)):#mientras queden vertices por visitar
             lower_cost=None
             lower_tag=None
             for tag,cost in distance.items():
-                if tag in not_visited:
+                if tag not in visited:#para los que no han sido visitados buscar el menor costo
                     if lower_cost is None or lower_cost>cost[0]:
                         lower_cost=cost[0]
                         lower_tag=tag
             
             if (distance[target][0]<=lower_cost) and lower_cost is not None :
                 return distance
-            not_visited.remove(lower_tag)
+            visited.append(lower_tag)
             
             currenly=self.get_Vertex()[lower_tag]
             
