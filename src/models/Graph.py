@@ -106,7 +106,7 @@ class Graph:
             for tag in visited:
                 candidate=self.vertex[tag].lower_cost_link(visited)
                 
-                if candidate[2] is not None:
+                if candidate[2] is not None:#candidate[2] es el costo que sale en la tupla
                     if lower is None or candidate[2]<lower[2]:
                         lower=candidate
             
@@ -115,6 +115,46 @@ class Graph:
             mst.append(lower)
         
         return mst    
+    
+    def dijkstra(self,origin,target):
+        
+        if not self.vertex:return None
+        
+        if origin not in self.get_Vertex() or target not in self.get_Vertex():
+            return None
+        distance={}# {vertice:(costo, origen)<-tupla}
+        not_visited=[]  
+        
+        for tag in self.get_Vertex():
+            distance[tag]= (float('inf'),None)#se etiquetan todas las distancias como infinito
+            not_visited.append(tag)
+        
+        
+            
+        distance[origin]=(0,None)
+        
+        while(len(not_visited)>0):#mientras queden vertices por visitar
+            lower_cost=None
+            lower_tag=None
+            for tag,cost in distance.items():
+                if tag in not_visited:
+                    if lower_cost is None or lower_cost>cost[0]:
+                        lower_cost=cost[0]
+                        lower_tag=tag
+            
+            if (distance[target][0]<=lower_cost) and lower_cost is not None :
+                return distance
+            not_visited.remove(lower_tag)
+            
+            currenly=self.get_Vertex()[lower_tag]
+            
+            for destiny,cost in currenly.links.items():
+                for c in cost:
+                    if lower_cost+c<distance[destiny][0]:
+                        distance[destiny]=(lower_cost+c,lower_tag)
+        
+        return distance
+        
             
                 
                 
